@@ -10,5 +10,11 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1", features = ["full"] }
 dotenvy = "0.15"
-chrono = "0.4"
-diesel = { version = "2.2.0", features = ["postgres"] }
+chrono = { version = "0.4", features = ["serde"] }
+diesel = { version = "^2.1.1", features = ["postgres", "chrono", "r2d2"] }
+r2d2 = ">= 0.7, < 0.9"
+r2d2-diesel = "1.0"  # Optional, for Diesel integration
+diesel_migrations = "2.2.0"
+shuttle-runtime = "0.51.0"
+shuttle-actix-web = "0.51.0"
+rand = "0.8.5"

@@ -1,0 +1,9 @@
+some testing sutff:
+
+for testing the shorten endpoint, you can use the following curl command:
+curl -X POST -H "Content-Type: application/json" \
+     -d '{"original_url":"https://www.linkedin.com/posts/abdibrokhim_i-know-you-are-struggling-to-find-an-idea-activity-7285736275242864644-ehpY?utm_source=share&utm_medium=member_desktop"}' \
+     http://localhost:8000/shorten
+
+
+then open browser and go to http://localhost:8000/replace_with_your_short_code to see the redirect in action.

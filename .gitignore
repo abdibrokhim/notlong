@@ -1,5 +1,3 @@
 /target
 .env
-.env.example
-Cargo.lock
 thoughts.md

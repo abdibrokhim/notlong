@@ -14,7 +14,7 @@
 
  <h3 align="center"><a href="">notlong</a></h3>
   <p align="center">
-  this is notlong - a new kind of url shortener.
+  this is notlong - a new kind of url shortener
     <br />
     <br />
     <a href="https://discord.gg/nUdcd9p8Ae">Join Community</a>

@@ -2,6 +2,11 @@
 name = "notlong"
 version = "0.1.0"
 edition = "2021"
+description = "a new kind of url shortener"
+license = "AGPL-3.0"
+homepage = "https://imcook.in"
+documentation = "https://www.linkedin.com/in/abdibrokhim/"
+repository = "https://github.com/abdibrokhim/notlong"
 
 [dependencies]
 actix-web = "4"
@@ -13,7 +18,7 @@ dotenvy = "0.15"
 chrono = { version = "0.4", features = ["serde"] }
 diesel = { version = "^2.1.1", features = ["postgres", "chrono", "r2d2"] }
 r2d2 = ">= 0.7, < 0.9"
-r2d2-diesel = "1.0"  # Optional, for Diesel integration
+r2d2-diesel = "1.0"
 diesel_migrations = "2.2.0"
 shuttle-runtime = "0.51.0"
 shuttle-actix-web = "0.51.0"

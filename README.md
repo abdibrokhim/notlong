@@ -49,19 +49,15 @@ Encrypt stored URLs to enhance security and protect user data.
 
 1. **Custom URL Aliases:** 
 Allow users to create custom shortened URLs.
-Demonstrates user input handling and validation.
 
 2. **Expiration Dates:**
 Enable URLs to expire after a certain date or number of uses.
-Involves time-based functionality and data management.
 
 3. **QR Code Generation:**
 Automatically generate QR codes for each shortened URL.
-Utilizes image generation libraries and binary data handling.
 
 4. **API Access:**
 Provide a minimal RESTful API for programmatic access to the URL shortener.
-Involves designing and implementing HTTP endpoints.
 
 ## Run Locally
 

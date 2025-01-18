@@ -9,7 +9,7 @@ use crate::db::schema::short_urls::dsl::*;
 use crate::db::schema::connected_wallets::dsl::*;
 use crate::db::models::{ConnectedWallet, NewConnectedWallet};
 
-use crate::utils::crypto::{encrypt_url, decrypt_url}; // (Add this line)
+use crate::utils::crypto::encrypt_url;
 
 // short urls
 pub fn find_by_short_code(conn: &mut PgConnection, code: &str) -> Result<ShortUrl, DieselError> {

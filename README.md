@@ -28,6 +28,7 @@
 i'm building blazingly fast url shortener ever.
 
 ## Built With
+
 - [Rust](https://www.rust-lang.org/)
 - [Actix](https://actix.rs/)
 - [Diesel](http://diesel.rs/)
@@ -115,6 +116,7 @@ i have no idea. but you can still donate and support project. look below.
 - [Support on Patreon](https://www.patreon.com/abdibrokhim)
 
 ### Crypto
+
 - Bitcoin: bc1qpylxaqwapk0tgdmpnnljj545z4lk2z9q5us6p6
 - Ethereum: 0xb4a8e71d82e8Bf84a02C7770585F9cD8b267aDB9
 - Solana: 4MpPHapcdb5MwRy57juUQ2wUt1EJo8BYqXsYKwSfCvz1

@@ -5,12 +5,13 @@ use serde::Deserialize;
 
 use crate::db::operations::{find_by_original_url, insert_short_url};
 use crate::db::models::NewShortUrl;
-use crate::utils::random_short_code; // We'll define a "utils" mod for random code
+use crate::utils::rcode::random_short_code; // We'll define a "utils" mod for random code
 use crate::Pool; // We'll define a type alias for DB pool in main or lib
 
 #[derive(Deserialize)]
 pub struct ShortenRequest {
     pub original_url: String,
+    pub encrypt: bool,
 }
 
 #[post("/shorten")]
@@ -24,22 +25,28 @@ pub async fn create_short_url(
 
     let original_url = req.original_url.trim();
 
-    // 1. Check if original_url exists
-    if let Ok(existing) = find_by_original_url(&mut conn, original_url) {
-        // If found, just return the existing short_code
-        return Ok(HttpResponse::Ok().json(existing));
+    // 1. Check if original_url exists (in plain or cipher?)
+    //    * If your logic expects them to match the plain text,
+    //      you might do find_by_original_url(...) only if encrypt == false
+    //    * or skip the check if you want unique encrypted vs non-encrypted
+    if !req.encrypt {
+        if let Ok(existing) = find_by_original_url(&mut conn, original_url) {
+            // If found, just return the existing
+            return Ok(HttpResponse::Ok().json(existing));
+        }
     }
 
     // 2. Otherwise, generate short_code
     let code = random_short_code(6);
 
     // 3. Insert new record into DB
-    let new_short = NewShortUrl {
+    let mut new_short = NewShortUrl {
         original_url,
         short_code: &code,
+        encrypted: req.encrypt,
     };
 
-    match insert_short_url(&mut conn, new_short) {
+    match insert_short_url(&mut conn, &mut new_short) {
         Ok(saved) => Ok(HttpResponse::Ok().json(saved)),
         Err(e) => {
             // If there's a duplicate key error, you could keep trying or return an error

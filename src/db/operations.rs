@@ -9,6 +9,8 @@ use crate::db::schema::short_urls::dsl::*;
 use crate::db::schema::connected_wallets::dsl::*;
 use crate::db::models::{ConnectedWallet, NewConnectedWallet};
 
+use crate::utils::crypto::{encrypt_url, decrypt_url}; // (Add this line)
+
 // short urls
 pub fn find_by_short_code(conn: &mut PgConnection, code: &str) -> Result<ShortUrl, DieselError> {
     short_urls
@@ -26,10 +28,16 @@ pub fn find_by_original_url(conn: &mut PgConnection, url: &str) -> Result<ShortU
 
 pub fn insert_short_url(
     conn: &mut PgConnection,
-    new_short: NewShortUrl
+    new_short: &mut NewShortUrl
 ) -> Result<ShortUrl, DieselError> {
+    // If the caller wants encryption
+    if new_short.encrypted {
+        if let Ok(cipher_b64) = encrypt_url(new_short.original_url) {
+            new_short.original_url = Box::leak(cipher_b64.into_boxed_str());
+        }
+    }
     diesel::insert_into(short_urls)
-        .values(&new_short)
+        .values(&*new_short)
         .get_result::<ShortUrl>(conn)
 }
 

@@ -7,8 +7,7 @@ use diesel::{r2d2::{self, ConnectionManager}, PgConnection};
 
 pub mod db;
 pub mod routes;
-pub mod utils;
-pub mod keys; // <--- so we can call get_pg_url()
+pub mod utils; // <--- so we can call get_pg_url()
 
 // We'll alias this for convenience
 type Pool = r2d2::Pool<ConnectionManager<PgConnection>>;
@@ -16,7 +15,7 @@ type Pool = r2d2::Pool<ConnectionManager<PgConnection>>;
 #[shuttle_runtime::main]
 async fn actix_main() -> ShuttleActixWeb<impl FnOnce(&mut web::ServiceConfig) + Send + Clone + 'static> {
     // 1) Get DB URL from your keys.rs (which reads from .env)
-    let database_url = keys::get_pg_url();
+    let database_url = utils::keys::get_pg_url();
     
     // 2) Create a Diesel r2d2 pool
     let manager = ConnectionManager::<PgConnection>::new(database_url);

@@ -41,6 +41,9 @@ i'm building blazingly fast url shortener ever.
 1. **Shorten URLs:** 
 Convert long URLs into short, easy-to-share links.
 
+2. **Data Encryption:**
+Encrypt stored URLs to enhance security and protect user data.
+
 ## Roadmap
 
 1. **Custom URL Aliases:** 
@@ -58,10 +61,6 @@ Utilizes image generation libraries and binary data handling.
 4. **API Access:**
 Provide a minimal RESTful API for programmatic access to the URL shortener.
 Involves designing and implementing HTTP endpoints.
-
-5. **Data Encryption:**
-Encrypt stored URLs to enhance security and protect user data.
-Demonstrates use of cryptographic libraries and secure coding practices.
 
 ## Run Locally
 
@@ -86,24 +85,29 @@ cp .env.example .env
 Replace with your stuff:
     
 ```shell
-...
+DATABASE_URL=postgresql://...:...@.../...?sslmode=require
+CRYPTO_KEY=...
+```
+
+Generate a secure random key (you can use openssl command line):
+
+```shell
+openssl rand -hex 32
 ```
 
 Run the development server with:
 
 ```shell
-cargo run
+cargo shuttle run
 ```
 
-Send request here: [http://localhost:8080](http://localhost:8080). You may try to run the tests with:
-
-```shell
-cargo test
-```
+Send request here: [http://localhost:8080](http://localhost:8080). 
+You may try to run the tests with. But there's no tests yet, lol.
+Anyway refer to `tests.md` for examples of how to test the endpoints.
 
 ## Future Plans
 
-...
+i have no idea. but you can still donate and support project. look below.
 
 ## Donate & Support
 

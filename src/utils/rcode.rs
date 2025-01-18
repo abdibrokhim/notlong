@@ -1,4 +1,4 @@
-// src/utils.rs
+// src/utils/rcode.rs
 use rand::{Rng, thread_rng, distributions::Alphanumeric};
 
 pub fn random_short_code(len: usize) -> String {

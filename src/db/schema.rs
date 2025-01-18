@@ -16,6 +16,7 @@ diesel::table! {
         #[max_length = 16]
         short_code -> Varchar,
         created_at -> Timestamp,
+        encrypted -> Bool,
     }
 }
 

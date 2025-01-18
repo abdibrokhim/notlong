@@ -34,3 +34,11 @@ curl -X POST -H "Content-Type: application/json" \
 
 [response]:
 {"id":1,"wallet_address":"6Wv8kxRJsNxmh2e2wdpXNnLpFQuik59Gghk2nDvSCaHL","tries_left":4,"created_at":"2025-01-17T00:53:44.988324"}
+
+
+[encrypt]
+
+[encrypt_url]:
+curl -X POST -H "Content-Type: application/json" \
+     -d '{"original_url":"https://x.com/search?q=%24TRUMP&src=trend_click&vertical=trends", "encrypt": true}' \
+     http://localhost:8000/shorten

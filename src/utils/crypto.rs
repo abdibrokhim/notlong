@@ -1,10 +1,10 @@
 // src/utils/crypto.rs
 
 use aes_gcm::{
-    aead::{Aead, KeyInit, OsRng},
+    aead::{Aead, KeyInit},
     Aes256Gcm, Key, Nonce
 };
-use base64::{encode, decode};
+use base64::{Engine as _, engine::general_purpose::STANDARD};
 use crate::utils::keys::get_crypto_key; // We'll define a "utils" mod for random code
 
 // 256-bit key for AES-GCM
@@ -28,13 +28,13 @@ pub fn encrypt_url(plaintext: &str) -> Result<String, String> {
     combined.extend_from_slice(nonce);
     combined.extend_from_slice(&ciphertext);
 
-    Ok(encode(&combined))
+    Ok(STANDARD.encode(&combined))
 }
 
 // Decrypts a base64-encoded ciphertext
 pub fn decrypt_url(cipher_b64: &str) -> Result<String, String> {
     // 1) Decode base64
-    let combined = decode(cipher_b64).map_err(|e| format!("base64 decode error: {e}"))?;
+    let combined = STANDARD.decode(cipher_b64).map_err(|e| format!("base64 decode error: {e}"))?;
     if combined.len() < 12 {
         return Err("Ciphertext is too short".to_string());
     }

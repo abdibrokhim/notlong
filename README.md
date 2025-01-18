@@ -25,7 +25,7 @@
 
 ## About The Project
 
-We're shipping the best n fast URL shortener ever...
+i'm building blazingly fast url shortener ever.
 
 ## Built With
 - [Rust](https://www.rust-lang.org/)
@@ -38,11 +38,13 @@ We're shipping the best n fast URL shortener ever...
 
 ## Features
 
-default url shortener with random 6 digit string.
+1. **Shorten URLs:** 
+Convert long URLs into short, easy-to-share links.
 
 ## Roadmap
 
-1. **Custom URL Aliases:** Allow users to create custom shortened URLs
+1. **Custom URL Aliases:** 
+Allow users to create custom shortened URLs.
 Demonstrates user input handling and validation.
 
 2. **Expiration Dates:**

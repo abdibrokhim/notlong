@@ -12,6 +12,7 @@ use crate::Pool; // We'll define a type alias for DB pool in main or lib
 pub struct ShortenRequest {
     pub original_url: String,
     pub encrypt: bool,
+    pub transaction_hash: Option<String>,
 }
 
 #[post("/shorten")]
@@ -26,9 +27,6 @@ pub async fn create_short_url(
     let original_url = req.original_url.trim();
 
     // 1. Check if original_url exists (in plain or cipher?)
-    //    * If your logic expects them to match the plain text,
-    //      you might do find_by_original_url(...) only if encrypt == false
-    //    * or skip the check if you want unique encrypted vs non-encrypted
     if !req.encrypt {
         if let Ok(existing) = find_by_original_url(&mut conn, original_url) {
             // If found, just return the existing
@@ -44,6 +42,7 @@ pub async fn create_short_url(
         original_url,
         short_code: &code,
         encrypted: req.encrypt,
+        transaction_hash: req.transaction_hash.as_deref(),
     };
 
     match insert_short_url(&mut conn, &mut new_short) {

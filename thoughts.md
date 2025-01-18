@@ -38,3 +38,10 @@ API Access - for developers. will think about it later.
 
 maybe i will introduce just monthly subscription for advanced features.
 
+expirable urls.
+
+by defautl urls will never expire. 
+
+but they pay for it. it will expire after 24 hours. defautl for all urls.
+
+it helps; safety, security, and privacy.

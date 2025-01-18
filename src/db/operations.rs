@@ -41,6 +41,40 @@ pub fn insert_short_url(
         .get_result::<ShortUrl>(conn)
 }
 
+pub fn mark_as_expired(conn: &mut PgConnection, short_url_id: i32) {
+    use crate::db::schema::short_urls::dsl::*;
+    let _ = diesel::update(short_urls.filter(id.eq(short_url_id)))
+        .set(expired.eq(true))
+        .execute(conn);
+}
+
+pub fn mark_as_expired_if_paid(
+    conn: &mut PgConnection,
+    short_url_id: i32,
+) -> Result<ShortUrl, DieselError> {
+    use crate::db::schema::short_urls::dsl::*;
+    
+    // 1) Fetch the existing row
+    let existing = short_urls
+        .filter(id.eq(short_url_id))
+        .first::<ShortUrl>(conn)?;
+
+    // 2) Check if transaction_hash is Some(...)
+    if existing.transaction_hash.is_none() {
+        // No payment => We do NOT set expired
+        // Return an error or do something else
+        return Err(DieselError::RollbackTransaction);
+        // or DieselError::NotFound or your custom logic
+    }
+
+    // 3) If user paid, set expired = true
+    let updated = diesel::update(short_urls.filter(id.eq(short_url_id)))
+        .set(expired.eq(true))
+        .get_result::<ShortUrl>(conn)?;
+
+    Ok(updated)
+}
+
 // web3 stuff
 pub fn create_wallet(
     conn: &mut PgConnection,

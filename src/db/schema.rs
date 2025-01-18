@@ -17,6 +17,8 @@ diesel::table! {
         short_code -> Varchar,
         created_at -> Timestamp,
         encrypted -> Bool,
+        expired -> Bool,
+        transaction_hash -> Nullable<Text>,
     }
 }
 

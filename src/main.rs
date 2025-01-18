@@ -33,6 +33,7 @@ async fn actix_main() -> ShuttleActixWeb<impl FnOnce(&mut web::ServiceConfig) + 
                 .app_data(web::Data::new(diesel_pool.clone()))
                 .service(routes::create_short_url)
                 .service(routes::redirect_short)
+                .service(routes::expire_short_url)
                 .service(routes::create_wallet_route)
                 .service(routes::decrement_wallet_route),
         );

@@ -16,7 +16,9 @@ pub struct ShortUrl {
     pub short_code: String,
     #[diesel(sql_type = diesel::sql_types::Timestamp)]
     pub created_at: NaiveDateTime,
-    pub encrypted: bool
+    pub encrypted: bool,
+    pub expired: bool,
+    pub transaction_hash: Option<String>,
 }
 
 // For inserting new rows
@@ -26,6 +28,7 @@ pub struct NewShortUrl<'a> {
     pub original_url: &'a str,
     pub short_code: &'a str,
     pub encrypted: bool,
+    pub transaction_hash: Option<&'a str>,
 }
 
 // The main struct for retrieving rows from `connected_wallets`.
